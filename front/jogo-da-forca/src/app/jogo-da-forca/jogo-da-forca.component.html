@@ -1,0 +1,61 @@
+<div class="container">
+    <div id="title" class="row">
+        <div class="col-xs-1 my-2 center-block text-center">
+            <h1>Jogo da Forca</h1>
+        </div>
+    </div>
+    <!-- Tela inicial -->
+    <div id="start" class="row" *ngIf="showInicio">
+      <div class="col-xs-1 center-block text-center my-3">
+        <button type="button"
+        (click)="iniciarJogo()"
+        class="btn btn-success btn-lg">INICIAR</button>
+      </div>
+    </div>
+
+    <!-- JOGO -->
+    <div id="jogo" class="row" *ngIf="showJogo">
+      <div class="col-xs-1 center-block text-center my-3">
+
+        <!-- status forca -->
+        <div class="row row-cols-2">
+          <div class="col">
+            <img [src]="imagemForca" class="rounded float-start img-thumbnail" alt="forca">
+          </div>
+          <div class="col center-block text-center">
+            <div class="d-flex fs-1 h-100 align-items-center" >
+              <strong><span *ngFor="let in of totalLetrasAux; let i = index" class="mx-2 align-middle">{{letrasDescobertas | GetLetraDescoberta: i}}</span></strong>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-2">
+          <div class="col center-block text-center fs-2">
+            <strong><span *ngFor="let letraUtil of letrasUtilizadas, let i = index" class="mx-2">{{letraUtil.toUpperCase()}}</span></strong>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="letra" [(ngModel)]="letra"/>
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="selecionarLetra()">Indicar</button>
+            </div>
+          </div>
+        </div>
+        <div id="dica" class="row">
+          <H4>{{showDica}}</H4>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Encerrado -->
+    <div id="fim-de-jogo" class="row" *ngIf="showFinal">
+      <div class="col-xs-1 center-block text-center my-3">
+        <h1 *ngIf="jogadorGanhou">Você Venceu!!!</h1>
+        <h1 *ngIf="!jogadorGanhou">GAME OVER</h1>
+        <button type="button"
+        (click)="iniciarJogo()"
+        class="btn btn-success btn-lg">JOGAR NOVAMENTE</button>
+      </div>
+
+    </div>
+
+</div>
